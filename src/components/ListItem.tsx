@@ -40,7 +40,9 @@ class ListItem extends Component<any,any> {
                         levelEdit={levelEdit}
                         arrayLevel = {arrayLevel}
                         handleEditClickCancel = {this.handleEditClickCancel}
-                        />
+                        handleEditClickSubmit = {this.handleEditClickSubmit}
+                        // handleEditSelectChange = {this.handleEditSelectChange}
+                    />
                 )
             }
             return (
@@ -77,6 +79,7 @@ class ListItem extends Component<any,any> {
             nameEdit: item.name,
             levelEdit: item.level
         })
+        console.log(index, item.id, item.name, item.level);
     }
 
     handleEditClickCancel = () => {
@@ -85,6 +88,22 @@ class ListItem extends Component<any,any> {
         });
     }
     
+    handleEditClickSubmit = (nameEdit: any, levelEdit: any) => {
+        let {items,idEdit} = this.state; 
+        if (items.length > 0){
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].id === idEdit){
+                    items[i].name = nameEdit;
+                    items[i].level = +levelEdit;
+                    break;
+                }
+            }
+        }
+        console.log(idEdit, nameEdit, levelEdit)
+        this.setState({
+            idEdit: ''
+        });
+    }
 
     render() {
         return(
